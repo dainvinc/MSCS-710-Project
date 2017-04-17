@@ -4,7 +4,7 @@ android {
     compileSdkVersion 24
     buildToolsVersion "25.0.2"
     defaultConfig {
-        applicationId "com.example.visha.taskmanager"
+        applicationId "com.mscs721.taskmanager"
         minSdkVersion 15
         targetSdkVersion 24
         versionCode 1
@@ -27,6 +27,5 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:24.2.1'
     compile 'com.android.support:support-vector-drawable:24.2.1'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
     testCompile 'junit:junit:4.12'
 }
