@@ -25,10 +25,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by visha on 3/25/2017.
- */
-
 public class AppDetail extends Activity {
 
     ListView lv;
@@ -39,12 +35,8 @@ public class AppDetail extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.app_detail);
-
-        //new AlertDialog.Builder(AppsActivity.this).setMessage(apps.toString()).show();
-
         setTitle("App Details");
-
-
+        
         if (savedInstanceState == null) {
             Bundle extras = getIntent().getExtras();
             if(extras == null) {
