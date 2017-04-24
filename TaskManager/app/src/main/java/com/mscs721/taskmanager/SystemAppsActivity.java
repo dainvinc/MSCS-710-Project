@@ -33,11 +33,14 @@ public class SystemAppsActivity extends Activity {
         setTitle("System Apps");
         lv = (ListView) findViewById(R.id.listview1);
         List<String> installedApps = getInstalledApps();
-
+        
+        // Creating new adapter to store the data
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,installedApps );
-
+        
+        // Setiing the data behind the list
         lv.setAdapter(arrayAdapter);
-
+        
+        // Callback is invoked when an item in this AdapterView has been clicked.
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -47,6 +50,8 @@ public class SystemAppsActivity extends Activity {
             }
         });
     }
+    
+    // Returns the List of all apps installed
     private List<String> getInstalledApps() {
         List<String> res = new ArrayList<String>();
         List<PackageInfo> packs = getPackageManager().getInstalledPackages(0);
