@@ -22,9 +22,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by visha on 3/24/2017.
- */
 
 public class AllAppsActivity extends Activity{
 
@@ -33,14 +30,16 @@ public class AllAppsActivity extends Activity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_apps);
-
+        
+        // Setting Up the title 
         setTitle("All Apps");
         lv = (ListView) findViewById(R.id.listview1);
 
+        // Creating a list of strings
         List<String> installedApps = getInstalledApps();
-
         ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,installedApps );
-
+        
+        // Setting the data behind the list view
         lv.setAdapter(arrayAdapter);
     }
     private List<String> getInstalledApps() {
