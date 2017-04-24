@@ -1,3 +1,11 @@
+/*********************************************************************
+*   MSCS-710-Project
+*   TaskManager
+*   Created By  :   Bhargavi Madunala 
+*                    Mithin Sharma
+*                    Surya Kiran Akula
+*                    Vishal Koosuri           
+**********************************************************************/
 package com.mscs721.taskmanager;
 
 import android.app.Activity;
