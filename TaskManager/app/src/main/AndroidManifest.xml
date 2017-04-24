@@ -23,6 +23,7 @@
         <activity android:name=".AppsActivity"></activity>
         <activity android:name=".SystemAppsActivity"></activity>
         <activity android:name=".TestActivity"></activity>
+        <activity android:name=".AppDetail"></activity>
     </application>
 
 </manifest>
