@@ -26,7 +26,9 @@ public class SystemAppsActivity extends Activity {
 
     ListView lv;
     @Override
+    // It intialize our activity
     public void onCreate(Bundle savedInstanceState) {
+        //Application is not loaded this method is called
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_apps);
 
@@ -66,7 +68,7 @@ public class SystemAppsActivity extends Activity {
         }
         return res;
     }
-
+    // Filter the system app
     private boolean isSystemPackage(PackageInfo pkgInfo) {
         return ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) ? true : false;
     }
