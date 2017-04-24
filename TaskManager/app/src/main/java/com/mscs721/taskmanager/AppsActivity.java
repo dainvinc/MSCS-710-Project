@@ -63,9 +63,10 @@ public class AppsActivity extends Activity {
             PackageInfo p = packs.get(i);
             if ((isSystemPackage(p) == false)) {
                 String appName = p.applicationInfo.loadLabel(getPackageManager()).toString();
+                String packName = p.applicationInfo.packageName.toString();
                 //Drawable icon = p.applicationInfo.loadIcon(getPackageManager());
                 //res.add(new AppList(appName, icon));
-                res.add(new String(appName));
+                res.add(new String(packName));
             }
         }
         return res;
