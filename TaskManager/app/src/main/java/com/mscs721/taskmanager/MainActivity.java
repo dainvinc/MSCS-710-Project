@@ -87,6 +87,7 @@ public class MainActivity extends AppCompatActivity {
         // Allows to Respond when an item is clicked
         appsButton.setOnClickListener(new View.OnClickListener() {
             @Override
+            // This method is called when the button is actually clicked or tapped
             public void onClick(View v) {
                 Intent appsScreen = new Intent(MainActivity.this, AppsActivity.class);
                 startActivity(appsScreen);
@@ -152,7 +153,7 @@ public class MainActivity extends AppCompatActivity {
 
         return 0;
     }
-
+    // examine the cpu
     public int CpuRead(){
         return 1;
     }
