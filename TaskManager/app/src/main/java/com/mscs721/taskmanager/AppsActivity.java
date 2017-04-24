@@ -31,7 +31,7 @@ public class AppsActivity extends Activity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.all_apps);
+        setContentView(R.layout.all_apps); // display the Layout created thorugh XML.
         setTitle("Installed Apps");
         lv = (ListView) findViewById(R.id.listview1);
         final List<String> installedApps = getInstalledApps();
