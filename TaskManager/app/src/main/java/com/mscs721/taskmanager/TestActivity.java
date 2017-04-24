@@ -27,14 +27,15 @@ public class TestActivity extends AppCompatActivity {
         cpuTxt = (TextView) this.findViewById(R.id.cpuusage);
         cpuTxt.setText("CPU usage: "+readUsage());
     }
-
+    
+    // Calculating the usage
     private float readUsage() {
         try {
             RandomAccessFile reader = new RandomAccessFile("/proc/stat", "r");
             String load = reader.readLine();
-
+            
+            // Storing the values in string array toks 
             String[] toks = load.split(" ");
-
             long idle1 = Long.parseLong(toks[5]);
             long cpu1 = Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])
                     + Long.parseLong(toks[6]) + Long.parseLong(toks[7]) + Long.parseLong(toks[8]);
@@ -46,7 +47,8 @@ public class TestActivity extends AppCompatActivity {
             reader.seek(0);
             load = reader.readLine();
             reader.close();
-
+            
+            // Storing the values in string array toks
             toks = load.split(" ");
 
             long idle2 = Long.parseLong(toks[5]);
@@ -61,5 +63,4 @@ public class TestActivity extends AppCompatActivity {
 
         return 0;
     }
-
 }
