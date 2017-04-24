@@ -24,10 +24,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by visha on 3/25/2017.
- */
-
 public class AppsActivity extends Activity {
 
     ListView lv;
@@ -36,18 +32,17 @@ public class AppsActivity extends Activity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.all_apps);
-
-        //new AlertDialog.Builder(AppsActivity.this).setMessage(apps.toString()).show();
-
         setTitle("Installed Apps");
         lv = (ListView) findViewById(R.id.listview1);
-
         final List<String> installedApps = getInstalledApps();
-
+        
+        // Creating new adapter to store the data
         arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,installedApps );
 
+        // Setiing the data behind the list
         lv.setAdapter(arrayAdapter);
-
+        
+        // Callback is invoked when an item in this AdapterView has been clicked.
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -56,14 +51,11 @@ public class AppsActivity extends Activity {
                 Intent in = new Intent(getApplicationContext(),AppDetail.class);
                 in.putExtra("app",s);
                 startActivity(in);
-
             }
         });
-
-
-
     }
-
+    
+    // Returns the List all apps installed
     private List<String> getInstalledApps() {
         List<String> res = new ArrayList<String>();
         List<PackageInfo> packs = getPackageManager().getInstalledPackages(0);
