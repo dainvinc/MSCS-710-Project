@@ -22,10 +22,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by visha on 3/25/2017.
- */
-
 public class SystemAppsActivity extends Activity {
 
     ListView lv;
@@ -36,7 +32,6 @@ public class SystemAppsActivity extends Activity {
 
         setTitle("System Apps");
         lv = (ListView) findViewById(R.id.listview1);
-
         List<String> installedApps = getInstalledApps();
 
         final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,installedApps );
