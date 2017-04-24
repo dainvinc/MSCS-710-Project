@@ -45,34 +45,37 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Creates a view for a pie chart
         pieChart = (PieChart) findViewById(R.id.chart1);
         entries = new ArrayList<>();
         labels = new ArrayList<String>();
         addValuesToPieChart();
         addValuesToLabels();
-
+        
+        // Assigning data to the Pie Chart
         pieDataSet = new PieDataSet(entries, "");
         pieData = new PieData(labels, pieDataSet);
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         pieChart.setData(pieData);
 
+        // Retrives the memory usage(RAM)
         ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
         ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
         activityManager.getMemoryInfo(mi);
         long totalMemory = mi.totalMem/1048576L;
         availableMem = mi.availMem/1048576L;
-
+        
         mFreeMemMessage = (TextView) findViewById(R.id.freeMemory);
         mTotalMemMessage = (TextView) findViewById(R.id.totalMemory);
 
         mTotalMemMessage.setText("Total Memory: " +String.valueOf(totalMemory) +" MB");
         mFreeMemMessage.setText("Free Memory: " +String.valueOf(availableMem)+" MB");
 
-
         allButton = (Button) findViewById(R.id.all);
         appsButton = (Button) findViewById(R.id.apps);
         systemButton = (Button) findViewById(R.id.system);
 
+        // Allows to Respond when an item is clicked
         allButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -80,7 +83,8 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(allAppScreen);
             }
         });
-
+        
+        // Allows to Respond when an item is clicked
         appsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -101,25 +105,27 @@ public class MainActivity extends AppCompatActivity {
         cpuTxt.setText("CPU usage: "+readUsage());
     }
 
+    // Adding Values to the Pie Chart
     public void addValuesToPieChart() {
         entries.add(new BarEntry(2f, (int) readUsage()));
         entries.add(new BarEntry(8f, (int)availableMem));
         entries.add(new BarEntry(6f, 2));
     }
 
+    // Adding the Lables 
     public void addValuesToLabels() {
         labels.add("CPU Usage");
         labels.add("Available Memory");
         labels.add("Random");
     }
-
+    // Calculating the CPU usage
     public float readUsage() {
         try {
             RandomAccessFile reader = new RandomAccessFile("/proc/stat", "r");
             String load = reader.readLine();
-
+            
+            // Storing the values in string array toks
             String[] toks = load.split(" ");
-
             long idle1 = Long.parseLong(toks[5]);
             long cpu1 = Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])
                     + Long.parseLong(toks[6]) + Long.parseLong(toks[7]) + Long.parseLong(toks[8]);
@@ -131,9 +137,9 @@ public class MainActivity extends AppCompatActivity {
             reader.seek(0);
             load = reader.readLine();
             reader.close();
-
+            
+            // Storing the values in string array toks
             toks = load.split(" ");
-
             long idle2 = Long.parseLong(toks[5]);
             long cpu2 = Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])
                     + Long.parseLong(toks[6]) + Long.parseLong(toks[7]) + Long.parseLong(toks[8]);
