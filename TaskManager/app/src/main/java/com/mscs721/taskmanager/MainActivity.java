@@ -2,7 +2,7 @@
 *   MSCS-710-Project
 *   TaskManager
 *   Created By  :   Bhargavi Madunala 
-*                    Mithin Sharma
+*                    Mitin Sharma
 *                    Surya Kiran Akula
 *                    Vishal Koosuri           
 **********************************************************************/
@@ -38,12 +38,22 @@ public class MainActivity extends AppCompatActivity {
     private ArrayList<String> labels;
     private PieDataSet pieDataSet;
     private PieData pieData;
-    private long availableMem=0;
+    private long availableMem = 0;
+    private long totalMemory = 0;
+    private long freeMem = 0;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Retrieves the memory usage(RAM)
+        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
+        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
+        activityManager.getMemoryInfo(mi);
+        totalMemory = mi.totalMem/1048576L;
+        availableMem = mi.availMem/1048576L;
+        freeMem = totalMemory - availableMem;
 
         // Creates a view for a pie chart
         pieChart = (PieChart) findViewById(R.id.chart1);
@@ -57,13 +67,6 @@ public class MainActivity extends AppCompatActivity {
         pieData = new PieData(labels, pieDataSet);
         pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
         pieChart.setData(pieData);
-
-        // Retrives the memory usage(RAM)
-        ActivityManager.MemoryInfo mi = new ActivityManager.MemoryInfo();
-        ActivityManager activityManager = (ActivityManager) getSystemService(ACTIVITY_SERVICE);
-        activityManager.getMemoryInfo(mi);
-        long totalMemory = mi.totalMem/1048576L;
-        availableMem = mi.availMem/1048576L;
         
         mFreeMemMessage = (TextView) findViewById(R.id.freeMemory);
         mTotalMemMessage = (TextView) findViewById(R.id.totalMemory);
@@ -75,7 +78,7 @@ public class MainActivity extends AppCompatActivity {
         appsButton = (Button) findViewById(R.id.apps);
         systemButton = (Button) findViewById(R.id.system);
 
-        // Allows to Respond when an item is clicked
+        // Allows to respond when an item is clicked
         allButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         
-        // Allows to Respond when an item is clicked
+        // Allows to respond when an item is clicked
         appsButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -107,16 +110,16 @@ public class MainActivity extends AppCompatActivity {
 
     // Adding Values to the Pie Chart
     public void addValuesToPieChart() {
-        entries.add(new BarEntry(2f, (int) readUsage()));
-        entries.add(new BarEntry(8f, (int)availableMem));
-        entries.add(new BarEntry(6f, 2));
+        entries.add(new BarEntry(totalMemory, 0));
+        entries.add(new BarEntry(freeMem, 1));
+        entries.add(new BarEntry(availableMem, 2));
     }
 
-    // Adding the Lables 
+    // Adding the Labels
     public void addValuesToLabels() {
-        labels.add("CPU Usage");
+        labels.add("Total Memory");
         labels.add("Available Memory");
-        labels.add("Random");
+        labels.add("Free Memory");
     }
     // Calculating the CPU usage
     public float readUsage() {
@@ -124,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
             RandomAccessFile reader = new RandomAccessFile("/proc/stat", "r");
             String load = reader.readLine();
             
-            // Storing the values in string array toks
+            // Storing the values in string array tokens
             String[] toks = load.split(" ");
             long idle1 = Long.parseLong(toks[5]);
             long cpu1 = Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])
@@ -138,7 +141,7 @@ public class MainActivity extends AppCompatActivity {
             load = reader.readLine();
             reader.close();
             
-            // Storing the values in string array toks
+            // Storing the values in string array tokens
             toks = load.split(" ");
             long idle2 = Long.parseLong(toks[5]);
             long cpu2 = Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])

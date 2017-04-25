@@ -9,13 +9,9 @@
 package com.mscs721.taskmanager;
 
 import android.app.Activity;
-import android.app.ActivityManager;
-import android.app.AlertDialog;
-import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -25,7 +21,7 @@ import java.util.List;
 
 public class AllAppsActivity extends Activity{
 
-    ListView lv;
+    private ListView lv;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +33,8 @@ public class AllAppsActivity extends Activity{
 
         // Creating a list of strings
         List<String> installedApps = getInstalledApps();
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,installedApps );
+        ArrayAdapter<String> arrayAdapter =
+                new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,installedApps);
         
         // Setting the data behind the list view
         lv.setAdapter(arrayAdapter);
@@ -58,6 +55,6 @@ public class AllAppsActivity extends Activity{
     }
 
     private boolean isSystemPackage(PackageInfo pkgInfo) {
-        return ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) ? true : false;
+        return ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
     }
 }

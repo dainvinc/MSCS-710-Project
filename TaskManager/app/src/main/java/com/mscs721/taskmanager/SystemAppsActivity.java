@@ -24,7 +24,7 @@ import java.util.List;
 
 public class SystemAppsActivity extends Activity {
 
-    ListView lv;
+    private ListView lv;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,7 +35,8 @@ public class SystemAppsActivity extends Activity {
         List<String> installedApps = getInstalledApps();
         
         // Creating new adapter to store the data
-        final ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,installedApps );
+        final ArrayAdapter<String> arrayAdapter =
+                new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,installedApps );
         
         // Setiing the data behind the list
         lv.setAdapter(arrayAdapter);
