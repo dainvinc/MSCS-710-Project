@@ -9,7 +9,6 @@
 package com.mscs721.taskmanager;
 
 import android.app.Activity;
-import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -34,7 +33,7 @@ public class AllAppsActivity extends Activity{
         // Creating a list of strings
         List<String> installedApps = getInstalledApps();
         ArrayAdapter<String> arrayAdapter =
-                new ArrayAdapter<>(this,android.R.layout.simple_list_item_1,installedApps);
+                new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, installedApps);
         
         // Setting the data behind the list view
         lv.setAdapter(arrayAdapter);
@@ -48,13 +47,13 @@ public class AllAppsActivity extends Activity{
                 String appName = p.applicationInfo.loadLabel(getPackageManager()).toString();
                 //Drawable icon = p.applicationInfo.loadIcon(getPackageManager());
                 //res.add(new AppList(appName, icon));
-                res.add(new String(appName));
+                res.add(appName);
             }
         }
         return res;
     }
 
-    private boolean isSystemPackage(PackageInfo pkgInfo) {
-        return ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
-    }
+//    private boolean isSystemPackage(PackageInfo pkgInfo) {
+//        return ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
+//    }
 }
