@@ -12,12 +12,14 @@
     <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="233dp">
+        android:layout_height="250dp">
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/memoryChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"/>
 
         <!--<TextView-->
         <!--android:id="@+id/freeMemory"-->
@@ -35,12 +37,14 @@
     <LinearLayout
         android:id="@+id/content1"
         android:layout_width="match_parent"
-        android:layout_height="233dp">
+        android:layout_height="250dp">
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/cpuChart"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:layout_marginTop="25dp"
+            android:layout_marginBottom="25dp"/>
 
         <!--<TextView-->
         <!--android:id="@+id/freeMemory"-->
@@ -90,9 +94,9 @@
             android:id="@+id/all"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+            android:padding="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
             android:layout_marginEnd="281dp"
             android:layout_marginRight="281dp"
             android:background="@android:color/holo_green_light"
@@ -102,9 +106,10 @@
             android:id="@+id/system"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:padding="10dp"
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
+            android:layout_alignParentBottom="true"
             android:background="@android:color/holo_red_dark"
             android:text="System" />
 
@@ -112,10 +117,11 @@
             android:id="@+id/apps"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
+            android:padding="10dp"
+            android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
-            android:text="Apps"
-            tools:background="@android:color/holo_orange_dark" />
+            tools:background="@android:color/holo_orange_dark"
+            android:text="Apps" />
     </RelativeLayout>
 
 </LinearLayout>
