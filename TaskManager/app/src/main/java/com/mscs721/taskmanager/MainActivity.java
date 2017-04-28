@@ -33,14 +33,21 @@ public class MainActivity extends AppCompatActivity {
     private TextView mFreeMemMessage;
     private TextView mTotalMemMessage, cpuTxt;
     private Button allButton, appsButton, systemButton;
-    private PieChart pieChart;
-    private ArrayList<Entry> entries;
-    private ArrayList<String> labels;
-    private PieDataSet pieDataSet;
-    private PieData pieData;
-    private long availableMem = 0;
-    private long totalMemory = 0;
-    private long freeMem = 0;
+    private PieChart pieMemChart;
+    private PieChart pieCpuChart;
+    private ArrayList<Entry> memEntries;
+    private ArrayList<Entry> cpuEntries;
+    private ArrayList<String> memLabels;
+    private ArrayList<String> cpuLabels;
+    private PieDataSet pieMemDataSet;
+    private PieDataSet pieCpuDataSet;
+    private PieData pieMemData;
+    private PieData pieCpuData;
+    private long availableMem;
+    private long totalMemory;
+    private long freeMem;
+    private int usedCpu;
+    private int freeCpu;
 
     @Override
     protected void onCreate(final Bundle savedInstanceState) {
@@ -55,24 +62,43 @@ public class MainActivity extends AppCompatActivity {
         availableMem = mi.availMem/1048576L;
         freeMem = totalMemory - availableMem;
 
-        // Creates a view for a pie chart
-        pieChart = (PieChart) findViewById(R.id.chart1);
-        entries = new ArrayList<>();
-        labels = new ArrayList<String>();
-        addValuesToPieChart();
-        addValuesToLabels();
-        
-        // Assigning data to the Pie Chart
-        pieDataSet = new PieDataSet(entries, "");
-        pieData = new PieData(labels, pieDataSet);
-        pieDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
-        pieChart.setData(pieData);
-        
-        mFreeMemMessage = (TextView) findViewById(R.id.freeMemory);
-        mTotalMemMessage = (TextView) findViewById(R.id.totalMemory);
+        readCpuUsage();
 
-        mTotalMemMessage.setText("Total Memory: " +String.valueOf(totalMemory) +" MB");
-        mFreeMemMessage.setText("Free Memory: " +String.valueOf(availableMem)+" MB");
+        // Creates a view for a pie chart
+        pieMemChart = (PieChart) findViewById(R.id.memoryChart);
+        pieCpuChart = (PieChart) findViewById(R.id.cpuChart);
+
+
+        memEntries = new ArrayList<>();
+        cpuEntries = new ArrayList<>();
+
+        memLabels = new ArrayList<>();
+        cpuLabels = new ArrayList<>();
+
+        addValuesToMemPieChart();
+        addValuesToCpuPieChart();
+
+        addValuesToMemLabels();
+        addValuesToCpuLabels();
+
+        // Assigning data to the Pie Chart
+        pieMemDataSet = new PieDataSet(memEntries, "");
+        pieCpuDataSet = new PieDataSet(cpuEntries, "");
+
+        pieMemData = new PieData(memLabels, pieMemDataSet);
+        pieCpuData = new PieData(cpuLabels, pieCpuDataSet);
+
+        pieMemDataSet.setColors(ColorTemplate.COLORFUL_COLORS);
+        pieCpuDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
+
+        pieMemChart.setData(pieMemData);
+        pieCpuChart.setData(pieCpuData);
+        
+//        mFreeMemMessage = (TextView) findViewById(R.id.freeMemory);
+//        mTotalMemMessage = (TextView) findViewById(R.id.totalMemory);
+//
+//        mTotalMemMessage.setText("Total Memory: " +String.valueOf(totalMemory) +" MB");
+//        mFreeMemMessage.setText("Free Memory: " +String.valueOf(availableMem)+" MB");
 
         allButton = (Button) findViewById(R.id.all);
         appsButton = (Button) findViewById(R.id.apps);
@@ -105,25 +131,35 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        cpuTxt = (TextView) this.findViewById(R.id.cpuusage);
-        cpuTxt.setText("CPU usage: "+readUsage());
+//        cpuTxt = (TextView) this.findViewById(R.id.cpuusage);
+//        cpuTxt.setText("CPU usage: "+readUsage());
     }
 
     // Adding Values to the Pie Chart
-    public void addValuesToPieChart() {
-        entries.add(new BarEntry(totalMemory, 0));
-        entries.add(new BarEntry(freeMem, 1));
-        entries.add(new BarEntry(availableMem, 2));
+    public void addValuesToMemPieChart() {
+        memEntries.add(new BarEntry(freeMem, 0));
+        memEntries.add(new BarEntry(availableMem, 1));
+    }
+
+    public void addValuesToCpuPieChart() {
+        cpuEntries.add(new BarEntry(freeCpu, 0));
+        cpuEntries.add(new BarEntry(usedCpu, 1));
     }
 
     // Adding the Labels
-    public void addValuesToLabels() {
-        labels.add("Total Memory");
-        labels.add("Available Memory");
-        labels.add("Free Memory");
+    public void addValuesToMemLabels() {
+        //labels.add("Total Memory");
+        memLabels.add("Used Memory");
+        memLabels.add("Free Memory");
     }
+
+    public void addValuesToCpuLabels() {
+        cpuLabels.add("CPU Usage");
+        cpuLabels.add("Total CPU");
+    }
+
     // Calculating the CPU usage
-    public float readUsage() {
+    public int readCpuUsage() {
         try {
             RandomAccessFile reader = new RandomAccessFile("/proc/stat", "r");
             String load = reader.readLine();
@@ -141,14 +177,19 @@ public class MainActivity extends AppCompatActivity {
             reader.seek(0);
             load = reader.readLine();
             reader.close();
-            
+
             // Storing the values in string array tokens
             toks = load.split(" ");
             long idle2 = Long.parseLong(toks[5]);
             long cpu2 = Long.parseLong(toks[2]) + Long.parseLong(toks[3]) + Long.parseLong(toks[4])
                     + Long.parseLong(toks[6]) + Long.parseLong(toks[7]) + Long.parseLong(toks[8]);
 
-            return (float)(cpu2 - cpu1) / ((cpu2 + idle2) - (cpu1 + idle1));
+            float usedCpuFl = (float) (cpu2 - cpu1) / ((cpu2 + idle2) - (cpu1 + idle1));
+            System.out.println("*********************"+usedCpuFl);
+            usedCpu = (int) Math.ceil((1 - usedCpuFl)*100);
+            System.out.println("*********************"+usedCpu);
+            freeCpu = 100 - usedCpu;
+            return usedCpu;
 
         } catch (IOException ex) {
             ex.printStackTrace();
