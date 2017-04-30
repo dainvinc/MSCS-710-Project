@@ -34,7 +34,7 @@ public class AppsActivity extends Activity {
         final List<String> installedApps = getInstalledApps();
         
         // Creating new adapter to store the data
-        arrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, installedApps );
+        arrayAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, installedApps );
 
         // Setting the data behind the list
         lv.setAdapter(arrayAdapter);
@@ -58,18 +58,18 @@ public class AppsActivity extends Activity {
         List<PackageInfo> packs = getPackageManager().getInstalledPackages(0);
         for (int i = 0; i < packs.size(); i++) {
             PackageInfo p = packs.get(i);
-            if ((isSystemPackage(p) == false)) {
+            if (!(isSystemPackage(p))) {
                 String appName = p.applicationInfo.loadLabel(getPackageManager()).toString();
-                String packName = p.applicationInfo.packageName.toString();
                 //Drawable icon = p.applicationInfo.loadIcon(getPackageManager());
                 //res.add(new AppList(appName, icon));
-                res.add(new String(packName));
+                res.add(appName);
             }
         }
         return res;
     }
 
     private boolean isSystemPackage(PackageInfo pkgInfo) {
-        return ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0) ? true : false;
+        return ((pkgInfo.applicationInfo.flags & ApplicationInfo.FLAG_SYSTEM) != 0);
     }
 }
+
