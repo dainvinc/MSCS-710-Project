@@ -1,76 +1,109 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.visha.taskmanager.AppDetail">
+    tools:context="com.mscs721.taskmanager.AppDetail">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginStart="18dp"
+        android:layout_marginTop="16dp"
+        app:srcCompat="@mipmap/main_icon"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+
+    <TextView
+        android:id="@+id/apptitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginStart="22dp"
+        android:text="TextView"
+        android:textSize="24dp"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        android:layout_above="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_marginBottom="9dp" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/imageView"
+        android:layout_alignStart="@+id/imageView"
+        android:layout_below="@+id/imageView"
+        android:layout_marginTop="42dp"
+        android:text="Memory" />
 
     <FrameLayout
-        android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_below="@+id/textView2"
+        android:layout_marginTop="21dp"
+        android:id="@+id/frameLayout">
 
-        <TextView
-            android:id="@+id/app"
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/memoryChart"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/activity_vertical_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginTop="@dimen/activity_vertical_margin"
-            android:text="App Name" />
+            android:layout_height="match_parent"/>
 
     </FrameLayout>
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/frameLayout"
+        android:layout_alignStart="@+id/frameLayout"
+        android:layout_below="@+id/frameLayout"
+        android:layout_marginTop="30dp"
+        android:text="Storage" />
 
     <FrameLayout
-        android:id="@+id/content1"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.82">
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/textView3"
+        android:layout_alignStart="@+id/textView3"
+        android:layout_below="@+id/textView3"
+        android:layout_marginTop="28dp">
 
-        <Button
-            android:id="@+id/uninstall"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Uninstall" />
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/storageChart"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
     </FrameLayout>
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/all"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="281dp"
-            android:layout_marginRight="281dp"
-            android:background="@android:color/holo_green_light"
-            android:text="All" />
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="59dp"
+        android:text="Kill App"
+        android:layout_alignParentBottom="true"
+        android:layout_toRightOf="@+id/textView3"
+        android:layout_toEndOf="@+id/textView3" />
 
-        <Button
-            android:id="@+id/apps"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:text="Apps"
-            tools:background="@android:color/holo_orange_dark" />
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/button3"
+        android:layout_marginEnd="62dp"
+        android:layout_marginRight="62dp"
+        android:text="Unisntall" />
 
-        <Button
-            android:id="@+id/system"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentTop="true"
-            android:background="@android:color/holo_red_dark"
-            android:text="System" />
-    </RelativeLayout>
 
-</LinearLayout>
+</RelativeLayout>
