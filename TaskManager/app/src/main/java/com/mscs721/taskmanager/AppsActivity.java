@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -47,6 +48,7 @@ public class AppsActivity extends Activity {
                 String s = arrayAdapter.getItem(position);
                 Intent in = new Intent(getApplicationContext(), AppDetail.class);
                 in.putExtra("app", s);
+                //Toast.makeText(getApplicationContext(), "S: " + s, Toast.LENGTH_SHORT).show();
                 startActivity(in);
             }
         });
@@ -60,9 +62,10 @@ public class AppsActivity extends Activity {
             PackageInfo p = packs.get(i);
             if (!(isSystemPackage(p))) {
                 String appName = p.applicationInfo.loadLabel(getPackageManager()).toString();
+                String packName = p.packageName.toString();
                 //Drawable icon = p.applicationInfo.loadIcon(getPackageManager());
                 //res.add(new AppList(appName, icon));
-                res.add(appName);
+                res.add(packName);
             }
         }
         return res;
