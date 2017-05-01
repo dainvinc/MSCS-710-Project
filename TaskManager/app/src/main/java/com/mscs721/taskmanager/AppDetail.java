@@ -29,6 +29,7 @@ public class AppDetail extends Activity {
     private ListView lv;
     private TextView app;
     private Button uninstall;
+    private Button killAppButton;
     private String app_name;
     private int UNINSTALL_REQUEST_CODE = 1;
     @Override
@@ -43,6 +44,7 @@ public class AppDetail extends Activity {
                 app_name = null;
             } else {
                 app_name = extras.getString("app");
+                System.out.println("$$$$$$$$$ "+app_name);
             }
         } else {
             app_name = (String) savedInstanceState.getSerializable("app");
@@ -50,9 +52,17 @@ public class AppDetail extends Activity {
 
         Toast.makeText(getApplicationContext(), "App: " + app_name, Toast.LENGTH_SHORT).show();
 
-        app = (TextView) this.findViewById(R.id.app);
-        uninstall = (Button) this.findViewById(R.id.uninstall);
+        app = (TextView) this.findViewById(R.id.apptitle);
+        killAppButton = (Button) findViewById(R.id.button3);
+        killAppButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+
+            }
+        });
+
+        uninstall = (Button) this.findViewById(R.id.button4);
         app.setText(app_name);
+
 
         final ArrayList<PackageInfo> app_pack = new ArrayList<>();
         PackageManager pm = getApplicationContext().getPackageManager();
