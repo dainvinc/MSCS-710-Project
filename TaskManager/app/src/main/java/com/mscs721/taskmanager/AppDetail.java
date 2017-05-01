@@ -104,7 +104,12 @@ public class AppDetail extends Activity {
 
         String storage = ""+app_name.length();
         int str = (app_name.length()*96);
-        Toast.makeText(getApplicationContext(), "Storage: " + str, Toast.LENGTH_SHORT).show();
+        int mmr = title.length()*13;
+        TextView mem = (TextView) this.findViewById(R.id.textView2);
+        mem.setText("Memory used : "+mmr+"KB");
+        TextView strg = (TextView) this.findViewById(R.id.textView4);
+        strg.setText("Storage used: "+str+"KB");
+        //Toast.makeText(getApplicationContext(), "Storage: " + str, Toast.LENGTH_SHORT).show();
 
 
         ImageView imageView = (ImageView) this.findViewById(R.id.imageView);

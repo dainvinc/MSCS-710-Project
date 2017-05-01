@@ -24,15 +24,14 @@
         android:id="@+id/apptitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="22dp"
-        android:layout_marginStart="22dp"
+        android:layout_marginLeft="11dp"
+        android:layout_marginStart="11dp"
         android:text="TextView"
         android:textSize="24dp"
         android:textAppearance="@style/TextAppearance.AppCompat"
         android:layout_above="@+id/textView2"
-        android:layout_toRightOf="@+id/textView2"
-        android:layout_toEndOf="@+id/textView2"
-        android:layout_marginBottom="9dp" />
+        android:layout_toRightOf="@+id/textView4"
+        android:layout_toEndOf="@+id/textView4" />
 
     <TextView
         android:id="@+id/textView2"
@@ -45,56 +44,17 @@
         android:textSize="18dp"
         android:text="Memory" />
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignLeft="@+id/textView2"
-        android:layout_alignStart="@+id/textView2"
-        android:layout_below="@+id/textView2"
-        android:layout_marginTop="21dp"
-        android:id="@+id/frameLayout">
 
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/memoryChart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-
-    </FrameLayout>
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/frameLayout"
-        android:layout_alignStart="@+id/frameLayout"
-        android:layout_below="@+id/frameLayout"
-        android:layout_marginTop="30dp"
-        android:textSize="18dp"
-        android:text="Storage" />
-
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignLeft="@+id/textView3"
-        android:layout_alignStart="@+id/textView3"
-        android:layout_below="@+id/textView3"
-        android:layout_marginTop="28dp">
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/storageChart"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"/>
-    </FrameLayout>
 
     <Button
         android:id="@+id/button3"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="59dp"
         android:text="Kill App"
-        android:layout_alignParentBottom="true"
-        android:layout_toRightOf="@+id/textView3"
-        android:layout_toEndOf="@+id/textView3" />
+        android:layout_below="@+id/textView4"
+        android:layout_toRightOf="@+id/imageView"
+        android:layout_toEndOf="@+id/imageView"
+        android:layout_marginTop="100dp" />
 
     <Button
         android:id="@+id/button4"
@@ -102,10 +62,21 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
-        android:layout_alignTop="@+id/button3"
         android:layout_marginEnd="62dp"
         android:layout_marginRight="62dp"
-        android:text="Unisntall" />
+        android:text="Unisntall"
+        android:layout_alignTop="@+id/button3" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="38dp"
+        android:text="Storage"
+        android:textSize="20dp"
+        android:layout_below="@+id/textView2"
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2" />
 
 
 </RelativeLayout>
