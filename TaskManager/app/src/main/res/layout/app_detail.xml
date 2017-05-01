@@ -64,7 +64,7 @@
         android:layout_alignParentRight="true"
         android:layout_marginEnd="62dp"
         android:layout_marginRight="62dp"
-        android:text="Unisntall"
+        android:text="Uninstall"
         android:layout_alignTop="@+id/button3" />
 
     <TextView

@@ -7,12 +7,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context="com.mscs721.taskmanager.MainActivity"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:background="@color/colorPrimary">
 
     <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="200dp">
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/memoryChart"
@@ -37,7 +38,7 @@
     <LinearLayout
         android:id="@+id/content1"
         android:layout_width="match_parent"
-        android:layout_height="250dp">
+        android:layout_height="200dp">
 
         <com.github.mikephil.charting.charts.PieChart
             android:id="@+id/cpuChart"

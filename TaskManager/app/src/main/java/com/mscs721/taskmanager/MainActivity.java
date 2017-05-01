@@ -92,7 +92,9 @@ public class MainActivity extends AppCompatActivity {
         pieCpuDataSet.setColors(ColorTemplate.JOYFUL_COLORS);
 
         pieMemChart.setData(pieMemData);
+        pieMemChart.setDrawHoleEnabled(false);
         pieCpuChart.setData(pieCpuData);
+        pieCpuChart.setDrawHoleEnabled(false);
         
 //        mFreeMemMessage = (TextView) findViewById(R.id.freeMemory);
 //        mTotalMemMessage = (TextView) findViewById(R.id.totalMemory);
